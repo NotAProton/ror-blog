@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rorblog
+spec:
+  selector:
+    matchLabels:
+      run: rorblog
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: rorblog
+    spec:
+      containers:
+        - name: rorblog
+          image: rorblog:0.0.3
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: SECRET_KEY_BASE
+              value: secret
+            - name: RAILS_ENV
+              value: production
+            - name: POSTGRES_HOST
+              value: postgres-service
+            - name: POSTGRES_DB
+              value: rorblog_db
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: p@ssw0rd
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rorblog
+  labels:
+    run: rorblog
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    run: rorblog

@@ -1,6 +1,6 @@
 # RORBlog
 
-Because the world needed another blogging app written in RoR but deployed on k8s for handling the large traffic of two visitors with user agents being google-bot and bing-bot twice a day...
+Because the world needed another blogging app written in RoR but deployed on k8s for handling large spikes of the only two visitors with user agents being google-bot and bing-bot twice a day...
 
 ## Features
 - **Ruby on Rails**: A modern web framework for building scalable applications.
